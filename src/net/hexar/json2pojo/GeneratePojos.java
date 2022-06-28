@@ -36,11 +36,11 @@ class GeneratePojos {
 
     //region CLASS MAP -------------------------------------------------------------------------------------------------
 
-    private Map<String, JDefinedClass> mClassMap = new HashMap<>();
+    private Map<String, JDefinedClass> mClassMap = new LinkedHashMap<>();
     private JType mDeferredClass;
     private JType mDeferredList;
     private FieldComparator mFieldComparator;
-    private Map<JDefinedClass, Set<FieldInfo>> mFieldMap = new HashMap<>();
+    private Map<JDefinedClass, Set<FieldInfo>> mFieldMap = new LinkedHashMap<>();
 
     //endregion
 
@@ -141,7 +141,7 @@ class GeneratePojos {
             clazz = jPackage._class(className);
             annotateClass(clazz);
             mClassMap.put(className, clazz);
-            mFieldMap.put(clazz, new TreeSet<>(mFieldComparator));
+            mFieldMap.put(clazz, new LinkedHashSet<>());
         }
 
         // Iterate over all of the fields in this object
