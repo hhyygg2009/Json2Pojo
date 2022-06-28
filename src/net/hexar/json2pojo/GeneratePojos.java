@@ -1,5 +1,6 @@
 package net.hexar.json2pojo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.annotations.Expose;
@@ -370,8 +371,8 @@ class GeneratePojos {
      * @param clazz the class to annotate.
      */
     private static void annotateClass(JDefinedClass clazz) {
-        clazz.annotate(Generated.class).param("value", "net.hexar.json2pojo");
-        clazz.annotate(SuppressWarnings.class).param("value", "unused");
+//        clazz.annotate(Generated.class).param("value", "net.hexar.json2pojo");
+//        clazz.annotate(SuppressWarnings.class).param("value", "unused");
     }
 
     /**
@@ -384,15 +385,15 @@ class GeneratePojos {
     private static void annotateField(JFieldVar field, String propertyName) {
         // Use the SerializedName annotation if the field name doesn't match the property name
         if (!field.name().equals(propertyName)) {
-            field.annotate(SerializedName.class).param("value", propertyName);
+            field.annotate(JsonProperty.class).param("value", propertyName);
 
-            // If we always add @Expose, then add this too
-            if (ALWAYS_ANNOTATE_EXPOSE) {
-                field.annotate(Expose.class);
-            }
+//            // If we always add @Expose, then add this too
+//            if (ALWAYS_ANNOTATE_EXPOSE) {
+//                field.annotate(Expose.class);
+//            }
         } else {
             // Otherwise, just add @Expose
-            field.annotate(Expose.class);
+//            field.annotate(Expose.class);
         }
     }
 
