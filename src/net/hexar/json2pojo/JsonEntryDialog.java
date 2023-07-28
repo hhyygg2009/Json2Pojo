@@ -26,13 +26,14 @@ public class JsonEntryDialog extends JDialog {
     interface OnOkListener {
         /**
          * A callback to be invoked when the user has clicked the OK button.
-         *
-         * @param className the class name entered into the dialog.
+         *  @param className the class name entered into the dialog.
          * @param jsonText the JSON text entered into the dialog.
          * @param generateBuilders true if the generated classes should omit setters and generate builders.
          * @param useMPrefix true if the generated fields should have an 'm' prefix.
+         * @param mGetsetter
+         * @param mNotblank
          */
-        void onOk(String className, String jsonText, boolean generateBuilders, boolean useMPrefix);
+        void onOk(String className, String jsonText, boolean generateBuilders, boolean useMPrefix, boolean mGetsetter, boolean mNotblank);
     }
 
     //endregion
@@ -56,6 +57,8 @@ public class JsonEntryDialog extends JDialog {
     private RSyntaxTextArea mJsonText;
     private JCheckBox mUseMPrefix;
     private JCheckBox mGenerateBuilders;
+    private JCheckBox mGetsetter;
+    private JCheckBox mNotblank;
 
     //endregion
 
@@ -121,7 +124,9 @@ public class JsonEntryDialog extends JDialog {
                 mClassName.getText(),
                 mJsonText.getText(),
                 mGenerateBuilders.isSelected(),
-                mUseMPrefix.isSelected());
+                mUseMPrefix.isSelected(),
+                mGetsetter.isSelected(),
+                mNotblank.isSelected());
         dispose();
     }
 
